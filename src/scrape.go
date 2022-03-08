@@ -30,6 +30,11 @@ func Scrape(si ScrapeInfo) ([]string, bool) {
 	)
 
 	href := findHrefOf(myExamCategory, preScrapeURL)
+
+	if href == "not found" {
+		return nil, false
+	}
+
 	if href[0:5] == "https" {
 		myCategoryURL = href
 	} else {
@@ -75,17 +80,22 @@ func findHrefOf(targetWord, targetURL string) string {
 		targetCode = convertUTF8toSjis(targetWord)
 	}
 
+	foundTarget := false
 	doc.Find("a").EachWithBreak(func(i int, s *goquery.Selection) bool {
 		href, exists := s.Attr("href")
 		isTargetTag := (s.Text() == targetCode)
 
 		if exists && isTargetTag {
 			targetHref = href
+			foundTarget = true
 		}
 		return !isTargetTag
 		// break if !isTagetTag is false, in other words, isTargetTag is true.
 	})
 
+	if !foundTarget {
+		targetHref = "not found"
+	}
 	return targetHref
 }
 
