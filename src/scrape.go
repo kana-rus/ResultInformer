@@ -13,16 +13,16 @@ import (
 type ScrapeInfo struct {
 	baseURL       string
 	preScrapePath string
-	examNumber    string
 	examCategory  string
+	examNumber    string
 }
 
 func Scrape(si ScrapeInfo) ([]string, bool) {
 	var (
 		baseURL        = si.baseURL
 		preScrapePath  = si.preScrapePath
-		myExamNumber   = si.examNumber
 		myExamCategory = si.examCategory
+		myExamNumber   = si.examNumber
 	)
 	var (
 		preScrapeURL  = baseURL + preScrapePath
@@ -102,8 +102,8 @@ func findPassedIDsFrom(targetURL string) []string {
 		// (0001〜2569) + (A〜F)
 	)
 	for _, word := range wordList {
-		if idPattern.MatchString(word) {
-			id := strings.TrimSpace(word)
+		id := strings.TrimSpace(word)
+		if idPattern.MatchString(id) {
 			passedIDs = append(passedIDs, id)
 		}
 	}

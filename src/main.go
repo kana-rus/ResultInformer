@@ -16,9 +16,10 @@ func main() {
 	myScrapeInfo := ScrapeInfo{
 		baseURL:       "https://daigakujc.jp",
 		preScrapePath: "/pal.php?u=31&h=24",
-		examNumber:    "0692",
 		examCategory:  "工学部",
+		examNumber:    "0692",
 	}
+
 	passedIDs, iHasPassed := Scrape(myScrapeInfo)
 	res := httpResponse{
 		IDlist: passedIDs,
