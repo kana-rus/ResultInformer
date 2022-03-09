@@ -1,1 +1,1 @@
-web: bin/resultInformer
+web: bin/resultinformer

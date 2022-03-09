@@ -1,4 +1,4 @@
-module resultInformer
+module resultinformer
 
 go 1.17
 
