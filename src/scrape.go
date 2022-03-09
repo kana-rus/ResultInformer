@@ -1,4 +1,4 @@
-package resultinformer
+package main
 
 import (
 	"log"

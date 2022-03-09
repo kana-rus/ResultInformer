@@ -1,4 +1,4 @@
-module resultinformer
+module github.com/kana-rus/resultinformer
 
 go 1.17
 
