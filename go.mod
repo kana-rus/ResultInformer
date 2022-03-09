@@ -1,4 +1,4 @@
-module goqueryTest
+module resultInformer
 
 go 1.17
 
