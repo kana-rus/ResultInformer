@@ -1,5 +1,6 @@
 module github.com/kana-rus/resultinformer
 
+// +heroku goVersion go1.17
 go 1.17
 
 require (
