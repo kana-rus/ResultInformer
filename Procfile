@@ -1,1 +1,1 @@
-web: go run src/*.go
+web: ./bin/src
