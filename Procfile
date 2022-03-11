@@ -1,1 +1,1 @@
-web: bin/resultinformer
+web: go run src/*.go
