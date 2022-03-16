@@ -88,8 +88,7 @@ func main() {
 
 func main() {
 	response := getRes()
-	//startServer(response)
-	fmt.Println(response.IDlist)
+	startServer(response)
 }
 
 func startServer(res httpResponse) {

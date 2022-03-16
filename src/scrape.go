@@ -81,22 +81,17 @@ func findHrefOf(targetWord, targetURL string) string {
 		targetCode = convertUTF8toSjis(targetWord)
 	}
 
-	foundTarget := false
 	doc.Find("a").EachWithBreak(func(i int, s *goquery.Selection) bool {
 		href, exists := s.Attr("href")
 		isTargetTag := (s.Text() == targetCode)
 
 		if exists && isTargetTag {
 			targetHref = href
-			foundTarget = true
 		}
 		return !isTargetTag
 		// break if !isTagetTag is false, in other words, isTargetTag is true.
 	})
 
-	if !foundTarget {
-		targetHref = "not found"
-	}
 	return targetHref
 }
 
