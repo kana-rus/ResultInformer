@@ -17,7 +17,7 @@ type ScrapeInfo struct {
 	examNumber    string
 }
 
-func Scrape(si ScrapeInfo) ([]string, bool) {
+func scrape(si ScrapeInfo) ([]string, bool) {
 	var (
 		baseURL        = si.baseURL
 		preScrapePath  = si.preScrapePath
@@ -69,7 +69,7 @@ func findHrefOf(targetWord, targetURL string) string {
 	doc.Find("meta").EachWithBreak(func(i int, s *goquery.Selection) bool {
 		charset, exists := s.Attr("charset")
 		if exists {
-			isUTF8site = (charset == "utf-8" || charset == "UTF-8")
+			isUTF8site = (charset == "utf-8")
 		}
 		return !exists
 		// break if !exists is false, in other words, exists is true.
@@ -100,7 +100,8 @@ func findHrefOf(targetWord, targetURL string) string {
 	return targetHref
 }
 
-/*
+
+// old version
 func findPassedIDsFrom(targetURL string) []string {
 	doc, err := goquery.NewDocument(targetURL)
 	if err != nil {
@@ -121,8 +122,10 @@ func findPassedIDsFrom(targetURL string) []string {
 	}
 	return passedIDs
 }
-*/
 
+
+/*
+// new version
 func findPassedIDsFrom(targetURL string) []string {
 	doc, err := goquery.NewDocument(targetURL)
 	if err != nil {
@@ -169,7 +172,7 @@ func findPassedIDsFrom(targetURL string) []string {
 			// 終了条件 (ここからは ID じゃない)
 			// (「以上〜名」という漢字で引っかかる)
 			// サイトの文字コードが ShiftJIS のため面倒
-			if rune > 'F' /* >'E'> ... >'2'>'1'>'0' */ {
+			if rune > 'F' /* >'E'> ... >'2'>'1'>'0' // {
 				break
 			}
 
@@ -185,6 +188,7 @@ func findPassedIDsFrom(targetURL string) []string {
 
 	return passedIDlist
 }
+*/
 
 func convertUTF8toSjis(utf8Str string) string {
 	encoder := japanese.ShiftJIS.NewEncoder()

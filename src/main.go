@@ -17,8 +17,13 @@ type httpResponse struct {
 var myScrapeInfo = ScrapeInfo{
 	baseURL:       "https://daigakujc.jp",
 	preScrapePath: "/pal.php?u=31&h=24",
+	/*
 	examCategory:  os.Getenv("MY_EXAM_CATEGORY"),
 	examNumber:    os.Getenv("MY_EXAM_NUMBER"),
+	*/
+	// test
+	examCategory: "工学部",
+	examNumber: "0692",
 }
 
 var execPoint time.Time
@@ -83,7 +88,8 @@ func main() {
 
 func main() {
 	response := getRes()
-	startServer(response)
+	//startServer(response)
+	fmt.Println(response.IDlist)
 }
 
 func startServer(res httpResponse) {
@@ -106,7 +112,7 @@ func startServer(res httpResponse) {
 }
 
 func getRes() httpResponse {
-	passedIDs, iHasPassed := Scrape(myScrapeInfo)
+	passedIDs, iHasPassed := scrape(myScrapeInfo)
 	res := httpResponse{
 		IDlist: passedIDs,
 		Passed: iHasPassed,
