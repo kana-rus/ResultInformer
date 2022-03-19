@@ -14,16 +14,11 @@ type httpResponse struct {
 	Passed bool     `json:"passed"`
 }
 
-var myScrapeInfo = ScrapeInfo{
+var myScrapeInfo = scrapeInfo{
 	baseURL:       "https://daigakujc.jp",
 	preScrapePath: "/pal.php?u=31&h=24",
-	/*
 	examCategory:  os.Getenv("MY_EXAM_CATEGORY"),
 	examNumber:    os.Getenv("MY_EXAM_NUMBER"),
-	*/
-	// test
-	examCategory: "工学部",
-	examNumber: "0692",
 }
 
 var execPoint time.Time
@@ -41,53 +36,45 @@ func init() {
 	execPoint = time.Date(2022, 3, 10, 12, 0, 0, 0, jst)
 }
 
-/*
 func main() {
-		for {
-			now := nowFunc()
-			diffMin := execPoint.Sub(now).Minutes()
-			if diffMin < 5 {
-				break
-			}
-			time.Sleep(10 * time.Second)
+	for {
+		now := nowFunc()
+		diffMin := execPoint.Sub(now).Minutes()
+		if diffMin < 5 {
+			break
 		}
-		for {
-			now := nowFunc()
-			diffSec := execPoint.Sub(now).Seconds()
-			if diffSec < 10 {
-				break
-			}
-			time.Sleep(5 * time.Second)
+		time.Sleep(10 * time.Second)
+	}
+	for {
+		now := nowFunc()
+		diffSec := execPoint.Sub(now).Seconds()
+		if diffSec < 10 {
+			break
 		}
-		for {
-			now := nowFunc()
-			diffMilisec := execPoint.Sub(now).Milliseconds()
-			if diffMilisec < 500 {
-				break
-			}
-			if diffMilisec < 600 {
-				time.Sleep(10 * time.Millisecond)
-			} else {
-				time.Sleep(100 * time.Millisecond)
-			}
+		time.Sleep(5 * time.Second)
+	}
+	for {
+		now := nowFunc()
+		diffMilisec := execPoint.Sub(now).Milliseconds()
+		if diffMilisec < 500 {
+			break
 		}
-		time.Sleep(500 * time.Millisecond)
-
-		var response = getRes()
-		for {
-			if len(response.IDlist) > 0 {
-				break
-			}
-			time.Sleep(50 * time.Millisecond)
-			response = getRes()
+		if diffMilisec < 600 {
+			time.Sleep(10 * time.Millisecond)
+		} else {
+			time.Sleep(100 * time.Millisecond)
 		}
-
-		startServer(response)
-}
-*/
-
-func main() {
-	response := getRes()
+	}
+	time.Sleep(500 * time.Millisecond)
+	
+	var response = getRes()
+	for {
+		if len(response.IDlist) > 0 {
+			break
+		}
+		time.Sleep(50 * time.Millisecond)
+		response = getRes()
+	}
 	startServer(response)
 }
 

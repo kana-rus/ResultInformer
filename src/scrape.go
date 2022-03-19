@@ -10,14 +10,13 @@ import (
 	"golang.org/x/text/transform"
 )
 
-type ScrapeInfo struct {
+type scrapeInfo struct {
 	baseURL       string
 	preScrapePath string
 	examCategory  string
 	examNumber    string
 }
-
-func scrape(si ScrapeInfo) ([]string, bool) {
+func scrape(si scrapeInfo) ([]string, bool) {
 	var (
 		baseURL        = si.baseURL
 		preScrapePath  = si.preScrapePath
